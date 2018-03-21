@@ -6,7 +6,9 @@
 	labelBirthday:"Birthday",
 	labelCashValue:"Cash Value",
 	labelPolicyYear:"Policy Year",
-	labelAgent:"Agent"
+	labelAgent:"Agent",
+	labelPercentage:"Percetange",
+	labelIRR:"IRR"
 
 }
 
