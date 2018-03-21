@@ -119,30 +119,71 @@ class ProposalComponment extends Component{
 		</tbody></table></div>);
 	}
 }
+class IRRResultComponent extends Component{
+	constructor(props){
+		super(props);
+		this.state={
+			result:this.props.result
+		}
+	}
+	
+	render(){
+		const{result} =this.state;
+
+		return (
+			<table>
+			<thead>
+			</thead>
+			<tbody>
+			{ result && result.length > 0 &&
+				 ( result.map((item,key)=>{
+					return (<tr>
+							<td>{item.year} </td>
+							<td>{item.percentage} </td>
+							<td>{item.irr} </td>
+							</tr>);
+				   }
+				  )
+				)
+			}
+			</tbody>
+			</table>
+			);
+	}
+
+}
 
 export default class IRRComponent extends Component{
 	constructor(props){
 		super(props);
 		console.log("glossary", glossary);
+		
 		this.state={
-			result:""
-		}
+			result:[]
+		 }
+		
 	}
 
-	handleClick=(input)=>{
-		console.log("handleClick", input)
-		this.setState({
-			result: JSON.stringify(input)
-		});
+	handleClick = (input)=>{
+		console.log("handleClick", JSON.stringify(input));
+		fetch('http://localhost:8080/irr', {
+      		method: 'post',
+      		headers: {'Content-Type': 'application/json'},
+		    body: JSON.stringify(input)
+        })
+       .then(response => { console.debug(response);
+       		this.setState({result:response});
+       	   })
+       .catch((e)=>console.error(e));
+      
 	}
 	
 	
 	render(){
-		const{result} = this.state;
 		
 		return (<div>
 			<ProposalComponment handleSubmit={this.handleClick}/>
-			<textarea rows="10" value={result} />
+			<IRRResultComponent result ={this.state.result}/>
 			</div>);
 	}
 
