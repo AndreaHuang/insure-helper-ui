@@ -16,11 +16,13 @@ const initCashValue=[{year:10,amount:null},{year:15,amount:null},{year:20,amount
 		//console.log("glossary", glossary);
 		extendObservable(this,{
 			result:[],
-			cashFlow:initCashValue,
-			premium:20000,
-			paymentTerm:5,
-			birthYYMM:810926,
-			author: "Huang YanFang",
+			proposal:{
+				cashFlow:initCashValue,
+				premium:20000,
+				paymentTerm:5,
+				birthYYMM:810926,
+				author: "Huang YanFang"
+			},
 			i18n:glossary,
 			
 	})	
@@ -47,15 +49,14 @@ const initCashValue=[{year:10,amount:null},{year:15,amount:null},{year:20,amount
 	render(){
 		
 		return (<div>
+			<div id="header"><h1>{this.i18n.headerIRR}</h1></div>
+			<div id="pages">
 			<ProposalComponment 
 			handleSubmit={this.handleClick} 
-			cashFlow = {this.cashFlow}
-			premium = {this.premium}
-			paymentTerm ={this.paymentTerm}
-			birthYYMM ={this.birthYYMM}
-			author= {this.author}/>
+			proposal = {this.proposal}/>
 			<IRRResultComponent result ={this.result} hidden={this.result.length===0}/>
 			<span>{this.count}</span>
+			</div>
 			</div>);
 	}
 
@@ -65,34 +66,33 @@ class ProposalComponment extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			cashFlow:this.props.cashFlow,
-			premium: this.props.premium,
-			paymentTerm:this.props.paymentTerm,
-			birthYYMM:this.props.birthYYMM,
-			author: this.props.author,
+			proposal:this.props.proposal,
 			i18n:glossary,
-
 		};
 	}
 	clickAddRow=()=>{
-		let cashFlow = this.state.cashFlow;
-		cashFlow.push({year:null,amount:null});
+		let proposal = this.state.proposal
+		proposal.cashFlow.push({year:null,amount:null});
 		this.setState({
-			cashFlow:cashFlow
+			proposal:proposal
 		})
 	}
 	clickUpdate=(e,key)=>{
+		let proposal=this.state.proposal;
+		proposal[key] =e.target.value;
 		this.setState({
-			key:e.target.value
+			proposal:proposal
 		})
 	}
 
    clickUpdateCashFlow=(e,index,key)=>{
    	    // console.log("clickUpdateCashFlow",e.target.value,index,key);
-   		let cashFlow=this.state.cashFlow;
+   		let proposal=this.state.proposal;
+   		let cashFlow = proposal.cashFlow;
    		cashFlow[index][key]=e.target.value;
+   		proposal.cashFlow=cashFlow;
    		this.setState({
-			cashFlow:cashFlow
+			proposal:proposal
 		})
 		
    }
@@ -100,7 +100,7 @@ class ProposalComponment extends Component{
    hanldeSubmit=()=>{
    	
    	
-   let cashFlow =	this.state.cashFlow.map((item,index)=>{
+   let cashFlow =	this.state.proposal.cashFlow.map((item,index)=>{
    		// console.log(index,':',item);
    		let cashFlowItem={ value:item.amount};
    		if(item.year && (item.year+"").startsWith("@")) {
@@ -126,24 +126,27 @@ class ProposalComponment extends Component{
    }
 
 	render(){
-		const{i18n,cashFlow,premium,paymentTerm,birthYYMM,author} = this.state;
-			return(<div className={this.props.hidden?"hidden":""}>
+		const{i18n}=this.state;
+		
+		return(<div className={this.props.hidden?"hidden":""}>
+		
 		<table><tbody>
 		<tr>
 			<td><label>{i18n.labelAmountDeposit}</label> </td>
-			<td align="left"><input type="text" value={premium} onChange={(e)=>this.clickUpdate(e,"premium")}></input></td>
+			<td align="left"><input type="text" value={this.state.proposal.premium}
+			onChange={(e)=>this.clickUpdate(e,"premium")}></input></td>
 		</tr>
 		<tr>
 			<td><label>{i18n.labelPaymentTerm}</label></td>
-			<td><input type="text" value={paymentTerm} onChange={(e)=>this.clickUpdate(e,"paymentTerm")}></input></td>
+			<td><input type="text" value={this.state.proposal.paymentTerm} onChange={(e)=>this.clickUpdate(e,"paymentTerm")}></input></td>
 		</tr>
 		<tr>
 			<td><label>{i18n.labelBirthday}</label></td>
-			<td><input type="text" value={birthYYMM} onChange={(e)=>this.clickUpdate(e,"birthYYMM")}></input></td>
+			<td><input type="text" value={this.state.proposal.birthYYMM} onChange={(e)=>this.clickUpdate(e,"birthYYMM")}></input></td>
 		</tr>
 		<tr>
 			<td><label>{i18n.labelAgent}</label></td>
-			<td><input type="text" value={author} onChange={(e)=>this.clickUpdate(e,"author")}></input></td>
+			<td><input type="text" value={this.state.proposal.author} onChange={(e)=>this.clickUpdate(e,"author")}></input></td>
 		</tr>
 		
 		</tbody>
@@ -153,8 +156,7 @@ class ProposalComponment extends Component{
 		<tr><td>{i18n.labelPolicyYear}</td><td>{i18n.labelCashValue}</td></tr>
 		</thead>
 		<tbody>
-
-		{ cashFlow.map( (item,index)=>{ return (<tr key={index}>
+		{ this.state.proposal.cashFlow.map( (item,index)=>{ return (<tr key={index}>
 		 	<td><input type="text" value={item.year? item.year:""} onChange= {(e)=>{this.clickUpdateCashFlow(e,index,"year")}} ></input></td>
 		 	<td><input type="text" value={item.amount?item.amount:""} onChange= {(e)=>{this.clickUpdateCashFlow(e,index,"amount")}}></input></td>
 		 	</tr>) } )

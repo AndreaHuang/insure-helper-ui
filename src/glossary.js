@@ -8,7 +8,8 @@
 	labelPolicyYear:"Policy Year",
 	labelAgent:"Agent",
 	labelPercentage:"Percetange",
-	labelIRR:"IRR"
+	labelIRR:"IRR",
 
+	headerIRR: "Return Summary"
 }
 
