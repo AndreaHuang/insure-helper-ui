@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Particles from 'react-particles-js';
 import './App.css';
 import IRRComponent from "./components/IRRComponent";
-import {NavigationComponent} from ".//components/Navigation/NavigationComponent.js";
+import Navigation from ".//components/Navigation/NavigationComponent.js";
 
 const particlesOptions = {
   particles: {
@@ -23,20 +23,22 @@ const particlesOptions = {
   }
 }
 
+
+
+class App extends Component {
+
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState(initialState)
+      this.setState({})
     } else if (route === 'home') {
       this.setState({isSignedIn: true})
     }
     this.setState({route: route});
   }
-  
-class App extends Component {
   render() {
     return (
       <div className="App">
-         <NavigationComponent/>
+         <Navigation onRouteChange ={this.onRouteChange}/>
          <Particles className='particles'
           params={particlesOptions}
           style={{

@@ -1,14 +1,15 @@
  export const glossary = {
-	btnSubmit:"Submit",
-	btnAddRow:"Add",
+	btnSubmit:"Calculate",
+	btnAddRow:"Add New Row",
 	labelAmountDeposit:"Annual Premium",
 	labelPaymentTerm:"Payment Term(Year)",
 	labelBirthday:"Birthday",
 	labelCashValue:"Cash Value",
 	labelPolicyYear:"Policy Year",
 	labelAgent:"Agent",
-	labelPercentage:"Percetange",
-	labelIRR:"IRR",
+	labelAmount:"Amount",
+	labelPercentage:"Total Return %",
+	labelIRR:"Annual Return %",
 
 	headerIRR: "Return Summary"
 }

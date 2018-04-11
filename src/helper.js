@@ -1,6 +1,7 @@
 const calculatANB=(dob)=>{
-	let today = new Date();
-	
+	var ageDifMs = Date.now() - dob.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
 
 }
-export {calculatANB}
+export default calculatANB;

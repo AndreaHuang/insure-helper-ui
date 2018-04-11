@@ -1,0 +1,87 @@
+export const EGSP2_10K5Y={
+  premium:10025,
+  paymentTerm:5,
+  anb:1,
+  cashFlow:
+[{year:10,amount:58583},
+ {year:15,amount:82391},
+ {year:20,amount:116606},
+{year:25,amount:164490},
+{year:30,amount:232480},
+{year:"@anb56",amount:1243840},
+{year:"@anb61",amount:1738126},
+{year:"@anb66",amount:2432840},
+{year:"@anb71",amount:3407618},
+{year:"@anb76",amount:4780278},
+{year:"@anb81",amount:6710158},
+{year:"@anb86",amount:9445220},
+{year:"@anb91",amount:13304456},
+{year:"@anb96",amount:18828746},
+{year:"@anb101",amount:26716951}]
+}
+
+export const EGSP2_10K8Y={
+  premium:10020,
+  paymentTerm:8,
+  anb:1,
+  cashFlow:
+[{year:10,amount:89704},
+ {year:15,amount:126161},
+ {year:20,amount:177194},
+{year:25,amount:248055},
+{year:30,amount:347870},
+{year:"@anb56",amount:1832261},
+{year:"@anb61",amount:2560370},
+{year:"@anb66",amount:3583709},
+{year:"@anb71",amount:5019625},
+{year:"@anb76",amount:7041662},
+{year:"@anb81",amount:9884465},
+{year:"@anb86",amount:13913371},
+{year:"@anb91",amount:19598308},
+{year:"@anb96",amount:27735901},
+{year:"@anb101",amount:39355753}]
+}
+
+export const EGSP2_10K12Y={
+  premium:10035,
+  paymentTerm:12,
+  anb:1,
+  cashFlow:
+[
+ {year:15,amount:180230},
+ {year:20,amount:250686},
+{year:25,amount:347458},
+{year:30,amount:482311},
+{year:"@anb56",amount:2486895},
+{year:"@anb61",amount:3475152},
+{year:"@anb66",amount:4864138},
+{year:"@anb71",amount:6813108},
+{year:"@anb76",amount:9557567},
+{year:"@anb81",amount:13416080},
+{year:"@anb86",amount:18884516},
+{year:"@anb91",amount:26600645},
+{year:"@anb96",amount:37645733},
+{year:"@anb101",amount:53417183}]
+}
+
+export const EGSP_10K5Y={
+  premium:10025,
+  paymentTerm:5,
+  anb:1,
+  cashFlow:
+[{year:10,amount:59596},
+ {year:15,amount:83518},
+ {year:20,amount:117755},
+{year:25,amount:165433},
+{year:30,amount:232857},
+{year:"@anb56",amount:1188664},
+{year:"@anb61",amount:1643311},
+{year:"@anb66",amount:2274563},
+{year:"@anb71",amount:3152409},
+{year:"@anb76",amount:4373005},
+{year:"@anb81",amount:6072349},
+{year:"@anb86",amount:8438717},
+{year:"@anb91",amount:11740952},
+{year:"@anb96",amount:16329161},
+{year:"@anb101",amount:22515947}]
+}

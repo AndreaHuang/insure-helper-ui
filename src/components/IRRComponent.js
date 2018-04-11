@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import {glossary} from "../glossary";
 import {extendObservable} from "mobx";
-import {observer} from "mobx-react"
-import {URL} from "../config.js"
-//import {helper} from "../"
+import {observer} from "mobx-react";
+import {URL} from "../config.js";
+import {calculatANB} from "../helper.js";
+import {EGSP2_10K5Y,EGSP2_10K8Y,EGSP2_10K12Y,EGSP_10K5Y} from "./CashValue.js";
 
-const initCashValue=[{year:10,amount:null},{year:15,amount:null},{year:20,amount:null},{year:25,amount:null},{year:30,amount:null}];
+//import {helper} from "../"
+//
+const CASHFLOW=EGSP_10K5Y;
 
  class IRRComponent extends Component{
 	
-	
-
 	constructor(props){
 		super(props);
 		//console.log("glossary", glossary);
 		extendObservable(this,{
 			result:[],
 			proposal:{
-				cashFlow:initCashValue,
-				premium:20000,
-				paymentTerm:5,
+				cashFlow:CASHFLOW.cashFlow,
+				premium:CASHFLOW.premium,
+				paymentTerm:CASHFLOW.paymentTerm,
+				anb:CASHFLOW.anb,
+				author: "Huang YanFang",
 				birthYYMM:810926,
-				author: "Huang YanFang"
 			},
 			i18n:glossary,
 			
@@ -104,7 +106,7 @@ class ProposalComponment extends Component{
    		// console.log(index,':',item);
    		let cashFlowItem={ value:item.amount};
    		if(item.year && (item.year+"").startsWith("@")) {
-   			cashFlowItem["anb"]= item.year;
+   			cashFlowItem["anb"]= (item.year+"").substr("@anb".length);
    		} else {
    			cashFlowItem["year"]= item.year;
    		}
@@ -113,15 +115,16 @@ class ProposalComponment extends Component{
 
 
    	let request={
-   		author:this.state.author,
-   		anb:37,
+   		author:this.author,
+   		anb:1,
    		deposit:{
-   			amount:this.state.premium,
-   			paymentTerm: this.state.paymentTerm,
+   			amount:this.state.proposal.premium,
+   			paymentTerm: this.state.proposal.paymentTerm,
    		},
    		cashValue:cashFlow,
 
    	};
+   	console.log(request);
    	this.props.handleSubmit(request);
    }
 
